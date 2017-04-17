@@ -13441,16 +13441,16 @@ height=263
             <span class="n">error</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">final_outputs</span>  <span class="c1"># Output layer error is the difference between desired target and actual output.</span>
             
             <span class="c1"># TODO: Calculate the hidden layer&#39;s contribution to the error</span>
-            <span class="n">hidden_error</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">weights_hidden_to_output</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span>
+            <span class="n">hidden_error</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">weights_hidden_to_output</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span>  <span class="c1">#as f&#39; is 1</span>
             
             <span class="c1"># TODO: Backpropagated error terms - Replace these values with your calculations.</span>
             <span class="n">output_error_term</span> <span class="o">=</span> <span class="n">error</span>
             <span class="n">hidden_error_term</span> <span class="o">=</span> <span class="n">hidden_error</span> <span class="o">*</span> <span class="n">hidden_outputs</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">hidden_outputs</span><span class="p">)</span>
 
             <span class="c1"># Weight step (input to hidden)</span>
-            <span class="n">delta_weights_i_h</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lr</span> <span class="o">*</span> <span class="n">hidden_error_term</span> <span class="o">*</span> <span class="n">X</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span>
+            <span class="n">delta_weights_i_h</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lr</span> <span class="o">*</span> <span class="n">hidden_error_term</span> <span class="o">*</span> <span class="n">X</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span>  <span class="c1"># I was stuck on this step and used help from the Slack forums to solve it.</span>
             <span class="c1"># Weight step (hidden to output)</span>
-            <span class="n">delta_weights_h_o</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lr</span> <span class="o">*</span> <span class="n">output_error_term</span> <span class="o">*</span> <span class="n">hidden_outputs</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span>
+            <span class="n">delta_weights_h_o</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lr</span> <span class="o">*</span> <span class="n">output_error_term</span> <span class="o">*</span> <span class="n">hidden_outputs</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span>  <span class="c1"># the [:,None] syntax was new to me as I am fairly new to numpy and pandas</span>
 
         <span class="c1"># TODO: Update the weights - Replace these values with your calculations.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">weights_hidden_to_output</span> <span class="o">+=</span> <span class="n">delta_weights_h_o</span> <span class="o">/</span> <span class="n">n_records</span> <span class="c1"># update hidden-to-output weights with gradient descent step</span>
